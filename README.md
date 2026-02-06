@@ -9,4 +9,4 @@ Assurez-vous d'avoir **Python** installé sur votre machine.
 Installez les librairies nécessaires via le terminal :
 
 ```bash
-pip install streamlit pandas plotly seaborn matplotlib
+pip install streamlit pandas plotly matplotlib numpy
