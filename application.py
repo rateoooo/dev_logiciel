@@ -151,7 +151,7 @@ def show_map(data, template):
                             title="Salaire Moyen par Pays (USD)", template=template)
     st.plotly_chart(fig_map, use_container_width=True)
     
-    # PARTIE SUNBURST SUPPRIMÉE ICI COMME DEMANDÉ
+    
 
 def show_correlations(data, template):
     c1, c2 = st.columns(2)
