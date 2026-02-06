@@ -19,6 +19,10 @@ st.markdown("""
     footer { display: none !important; }
     .no-print { display: none !important; }
 }
+/* Style pour les KPIs */
+[data-testid="stMetricValue"] {
+    font-size: 24px !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -150,8 +154,6 @@ def show_map(data, template):
                             hover_name="iso_alpha", color_continuous_scale="Plasma", 
                             title="Salaire Moyen par Pays (USD)", template=template)
     st.plotly_chart(fig_map, use_container_width=True)
-    
-    
 
 def show_correlations(data, template):
     c1, c2 = st.columns(2)
@@ -191,11 +193,27 @@ if df_selection.empty:
     st.warning("Aucune donnée ne correspond aux filtres.")
     st.stop()
 
-# KPIs
-c1, c2, c3 = st.columns(3)
-with c1: st.metric("Nombre de profils", f"{len(df_selection)}")
-with c2: st.metric("Salaire Médian", f"{df_selection['salary_in_usd'].median():,.0f} $")
-with c3: st.metric("Salaire Moyen", f"{df_selection['salary_in_usd'].mean():,.0f} $")
+# --- KPI Section (4 Colonnes) ---
+# Calcul des KPIs
+total_profils = len(df_selection)
+salaire_median = df_selection['salary_in_usd'].median()
+salaire_max = df_selection['salary_in_usd'].max()
+
+# Top Métier
+top_metier = df_selection['job_title'].mode()[0] if total_profils > 0 else "N/A"
+
+# Affichage sur 4 colonnes
+kpi1, kpi2, kpi3, kpi4 = st.columns(4)
+
+with kpi1:
+    st.metric("Total Profils", f"{total_profils}")
+with kpi2:
+    st.metric("Salaire Médian", f"{salaire_median:,.0f} $")
+with kpi3:
+    st.metric("Salaire Max", f"{salaire_max:,.0f} $")
+with kpi4:
+    st.metric("Top Métier", f"{top_metier}")
+
 st.markdown("---")
 
 # LOGIQUE PRINCIPALE : ONGLETS OU RAPPORT
