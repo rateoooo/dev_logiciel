@@ -102,7 +102,7 @@ df_selection = df[
     (df['company_location'].isin(selected_locations))
 ]
 
-# --- 3. Fonctions Graphiques (Sans Emojis) ---
+# --- 3. Fonctions Graphiques ---
 
 def show_trends(data, template):
     st.subheader("Évolution des Salaires (Moyenne par Année)")
